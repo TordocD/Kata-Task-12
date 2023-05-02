@@ -81,7 +81,10 @@ public class AdminController {
 
     @DeleteMapping("/delete_role")
     public String deleteRole(@RequestParam String deletedRoleName) {
-        roleService.deleteRoleByName(deletedRoleName);
+
+            if (!deletedRoleName.equals("USER") && !deletedRoleName.equals("ADMIN")) {
+                roleService.deleteRoleByName(deletedRoleName);
+            }
 
         return "redirect:/admin";
     }

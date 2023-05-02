@@ -20,8 +20,17 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public void add(Role role) {
+    public boolean add(Role role) {
+        try {
+            if (getByName(role.getRoleName()) != null) {
+                return false;
+            }
+        } catch (Exception e) {
+//            empty
+        }
         roleDao.add(role);
+
+        return true;
     }
 
     @Override

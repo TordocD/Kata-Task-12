@@ -72,6 +72,9 @@
                                     <button class="nav-link" id="newUserTab" data-bs-toggle="tab"
                                             data-bs-target="#newUser" type="button" role="tab" aria-controls="newUser"
                                             aria-selected="true">New user</button>
+                                    <button class="nav-link" id="rolesTab" data-bs-toggle="tab"
+                                            data-bs-target="#roles" type="button" role="tab" aria-controls="roles"
+                                            aria-selected="true">Roles control</button>
                                 </div>
                             </nav>
                         </div>
@@ -363,6 +366,37 @@
                                                 </select>
                                                 <button class="btn btn-success"
                                                         type="submit">Create user</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+<!--Roles control-->
+                                <div class="tab-pane" id="roles" role="tabpanel"
+                                     aria-labelledby="rolesTab" tabindex="0">
+                                    <div class="container bg-white p-3">
+                                        <div class="row w-25 mb-3">
+                                            <form th:action="@{/admin/add_new_role}" th:method="POST">
+                                                <label class="form-label fw-bold"
+                                                       for="newRole">Create new role</label>
+                                                <input type="text"
+                                                       id="newRole"
+                                                       name="newRoleName"
+                                                       class="form-control mb-2"
+                                                       placeholder="Role name"/>
+                                                <button class="btn btn-success mb-3" type="submit">Create</button>
+                                            </form>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <form th:action="@{/admin/delete_role}" th:method="DELETE">
+                                                <label class="form-label fw-bold"
+                                                       for="deletedRole">Delete role</label>
+                                                <select id="deletedRole" name="deletedRoleName" class="form-select w-25 mb-2">
+                                                    <option th:each="role: ${allRoles}"
+                                                            th:value="*{role.roleName}"
+                                                            th:text="*{role.roleName}"></option>
+                                                </select>
+                                                <button class="btn btn-danger" type="submit">Delete role</button>
                                             </form>
                                         </div>
                                     </div>
