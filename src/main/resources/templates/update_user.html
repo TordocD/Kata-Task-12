@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update user</title>
+</head>
+<body>
+
+<form id="logoutForm" method="POST" th:action="@{/logout}">
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+</form>
+<h5><a onclick="document.forms['logoutForm'].submit()">Logout</a></h5>
+
+<form th:action="@{/admin/update}" th:object="${user}" th:method="PATCH">
+    <label for="username">Username</label>
+    <input id="username"
+           name="username"
+           type="text"
+           th:field="*{username}"
+           th:value="*{username}"/> <br />
+
+    <label for="name">Name</label>
+    <input id="name"
+           name="name"
+           type="text"
+           th:field="*{name}"
+           th:value="*{name}"/> <br />
+
+    <label for="surname">Surname</label>
+    <input id="surname"
+           name="surname"
+           type="text"
+           th:field="*{surname}"
+           th:value="*{surname}"/> <br />
+
+    <label for="age">Age</label>
+    <input id="age"
+           name="age"
+           type="number"
+           th:field="*{age}"
+           th:value="*{age}"/> <br />
+
+        <select id="chosenRoles" name="chosenRoles" multiple="multiple">
+            <option th:each="role: ${allRoles}"
+                    th:value="${role.roleName}"
+                    th:text="${role.roleName}"></option>
+        </select>
+
+    <button type="submit">Update user</button>
+
+    <input type="hidden" th:field="*{id}"/>
+    <input type="hidden" th:field="*{password}"/>
+
+
+</form>
+</body>
+</html>
