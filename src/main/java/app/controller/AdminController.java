@@ -43,7 +43,8 @@ public class AdminController {
             Role role = roleService.getByName(chosenRole);
             roles.add(role);
         }
-        userService.saveUserWithNewAuthority(addedUser, roles);
+        addedUser.setRoles(roles);
+        userService.saveUser(addedUser);
 
         return "redirect:/admin";
     }
